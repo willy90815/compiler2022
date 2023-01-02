@@ -1,6 +1,6 @@
 from os import listdir
 from os import system,_exit
-#author 10827240 ??³æ?¯ç??
+#author 10827240 å³æŒ¯ç‘‹
 class Token_Cutter:
     def __init__(self):
         self.instruction_list = []
@@ -126,20 +126,29 @@ class Token_Cutter:
         
 class Analyzer:
     def __init__(self):
-        self.instruction_list = []
-        self.using_SICXE = False
+        pass
 
     def clear(self):
-        self.instruction_list = []
-        self.using_SICXE = False
-    def analze(self):
-        for ins in self.instruction_list:
-            try:
-                self.define_instruction_type(ins)
-            except:
-                pass
-                
-        return self.instruction_list
+        pass
+    def analze(self,code_line_list):
+        length = len(code_line_list)
+        i = 0
+        i_semicolon = 0
+        ins = []
+        for i in range(5):
+            ins.append(())
+        while i < length:
+            for token in code_line_list[i][i_semicolon:]:
+                ins.append(token)
+                if token[1] == ';':
+                    try:
+                        self.define_instruction_type(code_line_list[i])
+                    except:
+                        pass
+            t=code_line_list[i].index(token)
+
+            i+=1
+        return code_line_list
 
 
     def define_instruction_type(self,ins):
@@ -943,15 +952,16 @@ class Interface:
 
 # test section
 tk = Token_Cutter()
+analyzer = Analyzer()
 
 
-tk.get_token("./Example/input.txt")
+analyzer.analze(tk.get_token("./Example/input.txt"))
 
+#main
 
-
-entry = Interface()
+'''entry = Interface()
 while(1):
     entry.select_file()
     entry.select_mode()
     entry.choose_screen_print()
-    entry.compile()
+    entry.compile()'''
